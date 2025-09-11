@@ -7,12 +7,12 @@ public class PlayerMovement : MonoBehaviour
     Vector2 moveInput;
     
     Controls controls;
-    Rigidbody rb;
+    CharacterController characterController;
 
     void Awake()
     {
         controls = new Controls();
-        rb = GetComponent<Rigidbody>();
+        characterController = GetComponent<CharacterController>();
     }
 
     void OnEnable() => controls.Enable();
@@ -27,6 +27,6 @@ public class PlayerMovement : MonoBehaviour
     {
         moveInput = controls.Player.Move.ReadValue<Vector2>();
         Vector3 movement = (transform.right * moveInput.x + transform.forward * moveInput.y).normalized;
-        rb.MovePosition(movement * (speed * Time.deltaTime));
+        characterController.Move(movement * (speed * Time.deltaTime));
     }
 }
